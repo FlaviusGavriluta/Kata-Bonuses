@@ -8,18 +8,7 @@ public class Main {
     }
 
     public static long[] bonus(int[] arr, long s) {
-
-        double[] result = new double[arr.length];
-        for (int i = 0; i < arr.length; i++) {
-            result[i] = 1.0 / arr[i];
-        }
-        double sumOfInverseProportion = Arrays.stream(result).sum();
-
-        long[] calculateBonuses = new long[arr.length];
-        for (int i = 0; i < arr.length; i++) {
-            calculateBonuses[i] = (long) Math.round(result[i] / sumOfInverseProportion * s);
-        }
-
-        return calculateBonuses;
+        double sum = Arrays.stream(arr).mapToDouble(e -> 1.0 / e).sum();
+        return Arrays.stream(arr).mapToLong(e -> (long) Math.round(1.0 / e / sum * s)).toArray();
     }
 }
